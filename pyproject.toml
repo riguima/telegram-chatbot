@@ -10,16 +10,20 @@ packages = [{include = "telegram_chatbot"}]
 python = "^3.9"
 pyrogram = "^2.0.106"
 tgcrypto = "^1.2.5"
-gpt4all = "^0.2.3"
+python-dotenv = "^1.0.0"
+selenium = "^4.9.1"
+webdriver-manager = "^3.8.6"
+edgegpt = "^0.8.1"
+aiohttp = "^3.8.4"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"
 blue = "^0.9.1"
-taskipy = "^1.11.0"
 isort = "^5.12.0"
-jedi = "^0.18.2"
 pytest-cov = "^4.1.0"
+taskipy = "^1.11.0"
+ipython = "^8.14.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -34,6 +38,5 @@ line_length = 79
 
 [tool.taskipy.tasks]
 lint = "blue --check --diff . && isort --check --diff ."
-pre_test = "task lint"
 test = "pytest -s -x --cov=cray_freelas_bot -vv"
 post_test = "coverage html"
