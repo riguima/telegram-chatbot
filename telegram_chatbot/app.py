@@ -10,8 +10,7 @@ from pyrogram.types import Message
 
 load_dotenv()
 cookies = json.loads(open('./cookies.json', encoding='utf-8').read())
-bots = []
-usernames = []
+bots = {}
 
 
 def create_app() -> Client:
@@ -23,10 +22,10 @@ def create_app() -> Client:
 
     @app.on_message()
     async def chat(client: Client, message: Message):
-        if message.chat.username not in usernames:
-            bots.append(await Chatbot.create(cookies=cookies))
-            usernames.append(message.chat.username)
-        bot = bots[usernames.index(message.chat.username)]
+        username = message.chat.username
+        if username not in bots:
+            bots[username] = await Chatbot.create(cookies=cookies)
+        bot = bots[username]
         response = await bot.ask(
             prompt=message.text,
             conversation_style=ConversationStyle.precise,
