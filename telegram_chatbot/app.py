@@ -32,7 +32,14 @@ def create_app() -> Client:
             }
         else:
             chatbot = users_data[username]['chatbot']
-        response = await chatbot.ask(message.text)
-        await message.reply(response)
+        print(users_data)
+        if 'quero imagens' in message.text.lower():
+            await chatbot.generate_images(message.text)
+            for filename in os.listdir('images'):
+                await message.reply_photo(f'images/{filename}')
+                os.remove(f'images/{filename}')
+        else:
+            response = await chatbot.ask(message.text)
+            await message.reply(response)
         await searching.delete()
     return app
