@@ -12,6 +12,7 @@ pyrogram = "^2.0.106"
 tgcrypto = "^1.2.5"
 python-dotenv = "^1.0.0"
 httpx = "^0.24.1"
+edgegpt = "^0.10.11"
 
 
 [tool.poetry.group.dev.dependencies]
