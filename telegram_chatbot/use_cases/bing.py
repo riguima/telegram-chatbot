@@ -1,6 +1,5 @@
 import os
 import re
-import asyncio
 
 from dotenv import load_dotenv
 from EdgeGPT.EdgeGPT import Chatbot, ConversationStyle
@@ -14,7 +13,7 @@ class BingChatbot:
     async def ask(self, message: str) -> str:
         response = await self.chatbot.ask(
             prompt=message,
-            conversation_style=ConversationStyle.creative,
+            conversation_style=ConversationStyle.balanced,
             simplify_response=True,
         )
         formatted_response = self.format_message(response['text'])
@@ -24,8 +23,10 @@ class BingChatbot:
         regex = re.compile(r'\[\^\d+\^\]')
         return regex.sub('', message)
 
-    async def generate_images(self, message: str) -> str:
+    async def generate_images(self, message: str) -> None:
         load_dotenv()
-        async with ImageGenAsync(os.environ['AUTH_COOKIE'], True) as image_generator:
+        async with ImageGenAsync(
+            os.environ['AUTH_COOKIE'], True
+        ) as image_generator:
             images = await image_generator.get_images(message)
             await image_generator.save_images(images, output_dir='images')
