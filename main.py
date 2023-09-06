@@ -1,4 +1,3 @@
-import json
 import os
 
 from dotenv import load_dotenv
@@ -19,8 +18,7 @@ app = Client(
 
 @app.on_message()
 async def ask(_, message: Message) -> None:
-    cookies = json.load(open('cookies.json', encoding='utf-8'))
-    bot = await Chatbot.create(cookies=cookies)
+    bot = await Chatbot.create()
     chatbot = BingChatbot(bot)
     searching = await message.reply('Pesquisando...')
     if 'quero imagens' in message.text.lower():
