@@ -14,6 +14,7 @@ app = Client(
     os.environ['BOT_NAME'],
     api_id=os.environ['API_ID'],
     api_hash=os.environ['API_HASH'],
+    bot_token=os.environ['BOT_TOKEN'],
 )
 
 @app.on_message()
